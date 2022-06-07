@@ -27,13 +27,13 @@
     <form:form action="login" modelAttribute="login">
       <fieldset>
         <div class="cp_iptxt">
-          <form:input path="loginId" class="base_input" type="text" placeholder="ID" />
+          <form:input path="loginId" class="base_input" type="text" placeholder="ID" /><br>
           <form:errors path="loginId" cssStyle="color: red"/>
           <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
         </div>
 
         <div>
-          <form:input path="password" class="base_input" type="password" placeholder="PASS" />
+          <form:input path="password" class="base_input" type="password" placeholder="PASS" /><br>
           <form:errors path="password" cssStyle="color: red"/>
         </div>
       </fieldset>

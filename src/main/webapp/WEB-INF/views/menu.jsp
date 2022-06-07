@@ -32,7 +32,7 @@
     
     <!-- 検索機能 -->
     <form action="/search" method="get" class="search_container">
-      <input name="search" type="text" size="25" value="" placeholder="キーワード検索" />
+      <input name="keyword" type="text" size="25"  placeholder="キーワード検索" />
       <button type="submit">検索</button> 
     </form>
     
@@ -51,23 +51,19 @@
      </form>
      
     <table>
-        <div class="caption"><p>検索結果：${result.size()}件</p></div>
+        <div class="caption"><p>検索結果：${errorList.size()}件</p></div>
       <thead>
         <tr>
-          <th>商品ID</th>
-          <th>商品名</th>
-          <th>単価</th>
           <th>カテゴリ</th>
+          <th>エラーリスト</th>
           <th>詳細</th>
         </tr>
       </thead>
       <tbody>
-        <c:forEach var="result" items="${result}" >
+        <c:forEach var="el" items="${errorList}" >
           <tr>
-            <td><c:out value="${result.getProduct_id()}"/></td>
-            <td><c:out value="${result.getName()}"/></td>
-            <td><c:out value="${result.getPrice()}"/></td>
-            <td><c:out value="${result.getCategory()}"/></td>
+            <td><c:out value="${el.getCategory().getName()}"/></td>
+            <td><c:out value="${el.getErrorList()}"/></td>
             <td><a class="detail_btn" href="detail?id=${result.getId()}">詳細</a></td>
           </tr>
 		</c:forEach>
