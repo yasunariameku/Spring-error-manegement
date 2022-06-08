@@ -6,14 +6,14 @@ import lombok.Data;
 public class ErrorList {
 	
 	private int id;
-	private int categoryId;
+	private int category_Id;
 	private String errorList;
 	private String cause;
 	private String solution;
 	
 	private Category category;
 	
-	public void setCategoryId(int category_id) {
+	public void setCategory_Id(int category_id) {
 		if (this.category == null) {
 			this.category = new Category();
 		}

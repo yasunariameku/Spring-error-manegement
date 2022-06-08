@@ -15,7 +15,7 @@
   <div id="app">
 
     <div class="header">
-      <h1 class="site_logo"><a href="menu.jsp">商品管理システム</a></h1>
+      <h1 class="site_logo"><a href="menu.jsp">エラー管理アプリ</a></h1>
       <div class="user">
         <p class="user_name">${name}さん、 こんにちは</p>
         <form class="logout_form" action="logout" method="get">
@@ -64,7 +64,7 @@
           <tr>
             <td><c:out value="${el.getCategory().getName()}"/></td>
             <td><c:out value="${el.getErrorList()}"/></td>
-            <td><a class="detail_btn" href="detail?id=${result.getId()}">詳細</a></td>
+            <td><a class="detail_btn" href="detail?id=${el.getId()}">詳細</a></td>
           </tr>
 		</c:forEach>
       </tbody>

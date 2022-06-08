@@ -11,7 +11,7 @@ public class ErrorListForm {
 	private int id;
 	
 	@NotNull
-	private int categoryId;
+	private int category_Id;
 	
 	@NotBlank
 	private String errorList;

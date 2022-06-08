@@ -33,11 +33,60 @@ public class ErrorListDao {
 		MapSqlParameterSource param = new MapSqlParameterSource();
 		param.addValue("keyword", keyword);
 		
-		List<ErrorList> list = jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<ErrorList>(ErrorList.class));
-
-		System.out.println(list.get(0).getCategory().getName());
-		System.out.println(list.get(0).getErrorList());
-		
 		return jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<ErrorList>(ErrorList.class));
 	}
+	
+	public ErrorList findById(Integer id){
+			
+			String sql = """
+							select e.id
+							, e.category_id 
+							,e.error_list
+							,e.cause
+							,e.solution
+							, c.id category_id
+							, c.name category_name 
+							from error_list e
+							join categories c 
+							on e.category_id = c.id 
+							where e.id = :id
+							order by e.id;
+					""";
+			MapSqlParameterSource param = new MapSqlParameterSource();
+			param.addValue("id", id);
+			
+			List<ErrorList> list = jdbcTemplate.query(sql, param, new BeanPropertyRowMapper<ErrorList>(ErrorList.class));
+
+	        return list.isEmpty() ? null : list.get(0);
+		}
+	
+	public int insert (ErrorList errorList) {
+		String sql = """
+						insert into error_list(category_id, error_list, cause, solution, error_date)
+						values(:category_id, :error_list, :cause, :solution, current_timestamp)
+				""";
+		MapSqlParameterSource param = new MapSqlParameterSource();
+		
+
+		param.addValue("category_id", errorList.getCategory().getId());
+        param.addValue("error_list", errorList.getErrorList());
+        param.addValue("cause", errorList.getCause());
+        param.addValue("solution", errorList.getSolution());
+        
+        return jdbcTemplate.update(sql, param);
+
+	}
+	
+	
+	public int delete(int id) {
+		String sql = "DELETE FROM error_list WHERE id = :id;";
+		
+		MapSqlParameterSource param = new MapSqlParameterSource();
+		param.addValue("id", id);
+		
+		return jdbcTemplate.update(sql, param);
+
+	}
+	
+	
 }
