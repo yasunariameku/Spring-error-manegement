@@ -147,6 +147,45 @@ public class IndexController {
 		return "menu";
 	}
 	
+	//詳細ページに移動
+	@GetMapping(value= "update")
+	public String update(@RequestParam("id")Integer id,@ModelAttribute("update") ErrorListForm eForm,  Model model) {
+		//System.out.println(id);
+		
+		ErrorList errorList = errorListDao.findById(id);
+		model.addAttribute("errorList", errorList);
+		
+		var categoryList = categoryDao.findAll();
+		model.addAttribute("categoryList", categoryList);
+		return "updateInput";
+	}
+	
+	//更新
+	
+	 @RequestMapping(value= "update",params = "update", method = RequestMethod.POST)
+	 public String update(@Validated @ModelAttribute("errorListForm")ErrorListForm eForm,BindingResult bindingResult, Model model) {
+		 if(bindingResult.hasErrors()) {
+				return "insert";
+			}
+		 
+		 var errorList = new ErrorList();
+		 errorList.setId(eForm.getId());
+		 
+		 this.FormToErrorList(eForm, errorList);
+		 var count = errorListDao.update(errorList);
+		 
+		 if(count == 1) {
+				model.addAttribute("msg","更新に成功しました");
+		 }else {
+			model.addAttribute("msg","更新に失敗しました");
+		 }
+		 
+		 model.addAttribute("errorList", errorListDao.find(""));
+		 
+		 return "menu";
+
+	 }
+	 
 	
 	private void FormToErrorList(ErrorListForm eForm, ErrorList errorList) {
 		errorList.setCategory_Id(eForm.getCategory_Id());		

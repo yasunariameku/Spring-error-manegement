@@ -88,5 +88,26 @@ public class ErrorListDao {
 
 	}
 	
+	public int update(ErrorList errorList) {
+		String sql = """
+						UPDATE error_list 
+						SET category_id = :category_id
+						,error_list = :error_list
+						,cause = :cause
+						,solution = :solution
+						WHERE id = :id
+				""";
+		
+		MapSqlParameterSource param = new MapSqlParameterSource();
+		param.addValue("category_id", errorList.getCategory().getId());
+		param.addValue("error_list", errorList.getErrorList());
+		param.addValue("cause", errorList.getCause());
+		param.addValue("solution", errorList.getSolution());
+		param.addValue("id", errorList.getId());
+
+		return jdbcTemplate.update(sql, param);
+
+	}
+	
 	
 }
