@@ -54,7 +54,7 @@
           <div>
             <label>画像</label>
             <input type="file" name="file">
-            <span class="error">エラーメッセージ</span>
+            <c:if test="${not empty msg}"><p class="error">${msg}</p></c:if>
           </div>
         </fieldset>
           <div class="btns">

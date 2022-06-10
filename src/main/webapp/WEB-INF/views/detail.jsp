@@ -27,29 +27,29 @@
 
   <div class="update">
     <div class="form_body">
-      <div class="img_block">
+      <!-- <div class="img_block">
         <img src="images/マッキー.png" class="product_img"><br>
-      </div>
+      </div> -->
       <form:form action="detail" method="post" modelAttribute="detail">
       <form:input path="id" type="hidden" name="id" value="${errorList.getId()}" readonly="readonly" class="base-text" />
       
         <fieldset class="label-130 product_block">
-          <p class="error">エラーメッセージ</p>
+         <c:if test="${not empty msg}"><p class="error">${msg}</p></c:if>
           <div>
             <label>カテゴリ</label>
             <form:select path="category_Id" items="${categoryList}" itemValue="id" itemLabel="name"  class="base-text"></form:select>
           </div>
           <div>
             <label>出てきたエラー</label>
-            <form:input path="errorList" type="text" name="product_id" value="${errorList.getErrorList()}" readonly="readonly" class="base-text" />
+            <form:input path="errorList" type="textarea" name="product_id" value="${errorList.getErrorList()}" readonly="readonly" class="base-text" />
           </div>
           <div>
             <label>原因</label>
-            <form:input path="cause" type="text" name="name" value="${errorList.getCause()}" readonly="readonly" class="base-text" />
+            <form:input path="cause" type="textarea" name="name" value="${errorList.getCause()}" readonly="readonly" class="base-text" />
           </div>
           <div>
             <label>解決策</label>
-            <form:input path="solution" type="text" name="price" value="${errorList.getSolution()}" readonly="readonly" class="base-text" />
+            <form:input path="solution" type="textarea" name="price" value="${errorList.getSolution()}" readonly="readonly" class="base-text" />
           </div>
         </fieldset>
         <div>
