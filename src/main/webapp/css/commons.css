@@ -311,6 +311,7 @@ hr {
 	width: 100%;
   	margin: 4px;
   	height: 70px;
+  	word-break: break-word;
 }
 
 .base-text:focus {
